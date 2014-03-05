@@ -1,9 +1,18 @@
 package edu.tqnguyen.mylight;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +23,7 @@ public class MainActivity extends Activity {
 	private boolean isOn;
 	private Camera camera;
 	private Button toggle;
+	private Context ctx = MainActivity.this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +37,16 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				String info = "/facebook-android-sdk-3.6.0/LICENSE.txt";
+				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				URL url = classLoader.getResource("C:/Users/Toan/Desktop/test");
 
+				try {
+					Log.i("license: ", url.toURI().toString());
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (!isOn) {
 					startCamera();
 					toggle.setText("Turn Off");
